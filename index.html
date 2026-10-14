@@ -1,72 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TelShare - Share telegram links</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TelShare - Share telegram links</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>TelShare</h1>
-            <div id="auth-ui">
-                <button onclick="showLogin()">Login / Register</button>
-            </div>
-            <div id="user-ui" style="display:none;">
-                <span id="welcome-msg"></span>
-                <button onclick="logout()">Logout</button>
-            </div>
-        </header>
+  <div class="container">
+    <header>
+      <h1>TelShare</h1>
+      <div id="auth-ui">
+        <button onclick="showLogin()">Login / Register</button>
+      </div>
+      <div id="user-ui" style="display:none;">
+        <span id="welcome-msg"></span>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </header>
 
-        <!-- Post Form -->
-        <div id="post-box" class="card" style="display:none;">
-            <h3>Post a Link</h3>
-            <input type="text" id="post-link" placeholder="https://t.me">
-            <input type="text" id="post-text" placeholder="Description (Max 120 chars)" maxlength="120">
-            <small id="char-count">0/120</small>
-            <button onclick="submitPost()">Publish</button>
-            <div id="post-msg"></div>
-        </div>
-
-        <!-- Admin Panel -->
-        <div id="admin-panel" class="card admin-bg" style="display:none;">
-            <h3>👑 Admin Controls</h3>
-            <div class="admin-tools">
-                <input type="text" id="target-user" placeholder="Target Username">
-                <input type="text" id="admin-payload" placeholder="New Name or Badge Text">
-                <button onclick="adminAction('badge')">Give Badge</button>
-                <button onclick="adminAction('rename')">Rename User</button>
-            </div>
-        </div>
-
-        <!-- Feed -->
-        <div id="feed">
-            <p>Loading posts...</p>
-        </div>
+    <!-- Post Form -->
+    <div id="post-box" class="card" style="display:none;">
+      <h3>Post a Link</h3>
+      <input type="text" id="post-link" placeholder="https://t.me" />
+      <input type="text" id="post-text" placeholder="Description (Max 120 chars)" maxlength="120" />
+      <small id="char-count">0/120</small>
+      <button onclick="submitPost()">Publish</button>
+      <div id="post-msg" role="status" aria-live="polite"></div>
     </div>
 
-    <!-- Modals -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Join TelShare</h2>
-            <input type="email" id="reg-email" placeholder="Email">
-            <input type="password" id="reg-pass" placeholder="Password">
-            <button onclick="doRegister()">Create Account</button>
-            <hr>
-            <h3>Login</h3>
-            <input type="text" id="login-user" placeholder="Username">
-            <input type="password" id="login-pass" placeholder="Password">
-            <button onclick="doLogin()">Login</button>
-            <div id="auth-msg"></div>
-        </div>
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="card admin-bg" style="display:none;">
+      <h3>👑 Admin Controls</h3>
+      <div class="admin-tools">
+        <input type="text" id="target-user" placeholder="Target Username" />
+        <input type="text" id="admin-payload" placeholder="New Name or Badge Text" />
+        <button onclick="adminAction('badge')">Give Badge</button>
+        <button onclick="adminAction('rename')">Rename User</button>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Feed -->
+    <div id="feed">
+      <p>Loading posts...</p>
+    </div>
+  </div>
 
-    <!-- Native banner -->
-    <script async="async" data-cfasync="false" src="https://pl31820146.profitableratecpmnetwork.com/2ca0b7b2ccb582eecb2b81b07b07ffe4/invoke.js"></script>
-      <div id="container-2ca0b7b2ccb582eecb2b81b07b07ffe4"></div>
+  <!-- Login / Register Modal -->
+  <div id="login-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="close" onclick="closeModal()" aria-label="Close">&times;</button>
+      <h2>Join TelShare</h2>
+      <input type="email" id="reg-email" placeholder="Email" />
+      <input type="password" id="reg-pass" placeholder="Password" />
+      <button id="create-account-btn" onclick="doRegister()">Create Account</button>
+
+      <hr />
+
+      <h3>Login</h3>
+      <input type="text" id="login-user" placeholder="Username" />
+      <input type="password" id="login-pass" placeholder="Password" />
+      <button onclick="doLogin()">Login</button>
+      <div id="auth-msg" role="alert" aria-live="assertive"></div>
+    </div>
+  </div>
+
+  <!-- Persistent registration success dialog -->
+  <div id="reg-success" class="modal" style="display:none;">
+    <div class="modal-content">
+      <button class="close" onclick="hideRegSuccess()" aria-label="Close">&times;</button>
+      <h2>Account Created</h2>
+      <p>Your username:</p>
+      <div class="username-row">
+        <code id="created-username"></code>
+        <button id="copy-username-btn" onclick="copyCreatedUsername()">Copy</button>
+      </div>
+      <label><input type="checkbox" id="auto-copy" checked /> Auto copy to clipboard</label>
+      <p>You are now logged in.</p>
+      <button onclick="closeRegSuccess()">Continue</button>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+
+  <!-- Native banner -->
+  <script async="async" data-cfasync="false" src="https://pl31820146.profitableratecpmnetwork.com/2ca0b7b2ccb582eecb2b81b07b07ffe4/invoke.js"></script>
+  <div id="container-2ca0b7b2ccb582eecb2b81b07b07ffe4"></div>
 </body>
 </html>
