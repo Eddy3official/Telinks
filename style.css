@@ -1,15 +1,12 @@
-body { font-family: sans-serif; background: #f0f2f5; margin: 0; padding: 10px; }
-.container { max-width: 600px; margin: 0 auto; }
-.card { background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-input { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-button { background: #0088cc; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
-button:hover { background: #006699; }
-.post-header { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 5px; }
-.badge { background: #ffd700; color: #000; padding: 2px 5px; border-radius: 4px; font-size: 0.8em; margin-left: 5px; }
-.link-btn { display: inline-block; text-decoration: none; background: #e6f7ff; color: #0088cc; padding: 5px 10px; border-radius: 4px; margin-top: 10px; }
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-.modal-content { background: white; margin: 15% auto; padding: 20px; width: 300px; border-radius: 8px; }
-.close { float: right; cursor: pointer; font-size: 20px; }
-.admin-bg { border: 2px solid #ff4444; background: #fff5f5; }
-.del-btn { background: #ff4444; font-size: 0.8em; padding: 2px 6px; margin-left: 10px; }
+/* Toasts */
+#toast-container { position: fixed; top: 12px; right: 12px; z-index: 10000; display:flex; flex-direction:column; gap:8px; }
+.toast { background: rgba(0,0,0,0.85); color: #fff; padding: 10px 14px; border-radius: 6px; min-width: 180px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+.toast.success { background: #2ecc71; }
+.toast.error { background: #e74c3c; }
+
+/* Username row in reg modal */
+.username-row { display:flex; gap:8px; align-items:center; margin:8px 0; }
+.username-row code { background:#f4f4f4; padding:6px 8px; border-radius:4px; font-weight:700; }
+
+/* Make modals centered and responsive */
+.modal-content { max-width: 420px; width: 90%; margin: 8% auto; }
