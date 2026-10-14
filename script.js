@@ -1,4 +1,4 @@
-const API_URL = "https://workers.dev"; // PASTE YOUR URL HERE
+const API_URL = "https://social-backend.message-eddy3.workers.dev/"; // PASTE YOUR URL HERE
 
 // --- State ---
 let currentUser = localStorage.getItem("ts_user");
