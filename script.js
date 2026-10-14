@@ -40,7 +40,7 @@ async function loadPosts() {
                 <span style="color:#888; font-size:0.8em">${new Date(p.date).toLocaleDateString()}</span>
             </div>
             <p>${p.text}</p>
-            <a href="${p.link}" target="_blank" class="link-btn">Join Group ✈️</a>
+            <a href="${p.link}" target="_blank" class="link-btn">Join</a>
         `;
         feed.appendChild(div);
     });
