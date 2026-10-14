@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleShare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TeleShare</h1>
+            <div id="auth-ui">
+                <button onclick="showLogin()">Login / Register</button>
+            </div>
+            <div id="user-ui" style="display:none;">
+                <span id="welcome-msg"></span>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Post Form -->
+        <div id="post-box" class="card" style="display:none;">
+            <h3>Post a Group</h3>
+            <input type="text" id="post-link" placeholder="https://t.me">
+            <input type="text" id="post-text" placeholder="Description (Max 120 chars)" maxlength="120">
+            <small id="char-count">0/120</small>
+            <button onclick="submitPost()">Publish</button>
+            <div id="post-msg"></div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin-panel" class="card admin-bg" style="display:none;">
+            <h3>👑 Admin Controls</h3>
+            <div class="admin-tools">
+                <input type="text" id="target-user" placeholder="Target Username">
+                <input type="text" id="admin-payload" placeholder="New Name or Badge Text">
+                <button onclick="adminAction('badge')">Give Badge</button>
+                <button onclick="adminAction('rename')">Rename User</button>
+            </div>
+        </div>
+
+        <!-- Feed -->
+        <div id="feed">
+            <p>Loading posts...</p>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Join TeleShare</h2>
+            <input type="email" id="reg-email" placeholder="Email">
+            <input type="password" id="reg-pass" placeholder="Password">
+            <button onclick="doRegister()">Create Account</button>
+            <hr>
+            <h3>Login</h3>
+            <input type="text" id="login-user" placeholder="Username or 'admin'">
+            <input type="password" id="login-pass" placeholder="Password">
+            <button onclick="doLogin()">Login</button>
+            <div id="auth-msg"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
